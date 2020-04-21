@@ -1,0 +1,14 @@
+pip install PythonQwt
+pip install pyserial
+pip install neurodsp
+pip install PyQt5
+pip install pyqtwebengine
+pip install scikit-learn
+pip install importlib
+pip install pandas
+pip install ica
+pip install scipy
+pip install pyqtgraph
+pip install pyEDFlib
+pip install PyWavelets
+

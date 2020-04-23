@@ -30,7 +30,7 @@ remotely.
 EDF files.
 
 # INSTRUCTIONS:
-1) Install requirements as explained in requirements.txt
+1) Install requirements: pip install requirements.txt
 2) add permissions: sudo chmod 666 /dev/ttyUSB0 (your serial port)
 3) In the folder ./GENERAL/constants_02.py tcp/ip ADDRESS must be set: '10.1.25.82' (your IP)
 4) Run BCI_STANDARD_EXPERIMENT_03.py

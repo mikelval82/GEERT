@@ -5,17 +5,12 @@ fact removal and band-pass filtering. Being conscious that brain pattern
 recognition is under constant development, this software offers the option
 to import external python libraries with a predefined structure in order to
 include self-developed machine learning approaches, and as experimental
-designs require event synchronization, a tcp/ip interface is provided. In
-this paper the software is tested on emotion recognition using the Open-
-BCI system and a methodology for online EEG emotion estimation. The
-application acquired EEG signals in real time from the OpenBCI wearable
-system, and with the use of an imported methodology for online EOG ar-
-tifact removal, predicted emotional estates. The philosophy behind this
-case example is based on a supervised machine learning approach, and
+designs require event synchronization, a tcp/ip interface is provided. The philosophy behind this
+application is based on a supervised machine learning approach, and
 thus offers two modes of interaction: the first allows real-time acquisition
 and processing in order to generate a database and build models, while
 the second, provides online signal processing using trained models in order
-to classify brain patterns. The proposed application proved to be versatile
+to classify brain patterns. The proposed application is a versatile
 and easily adaptable to different experimental scenarios while maintain-
 ing high performance signal processing in real-time. Wearable devices are
 tools of special interest due to the posibilities they offer for BCI related

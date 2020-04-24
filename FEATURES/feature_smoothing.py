@@ -1,10 +1,11 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr 29 17:28:44 2019
-
-@author: anaiak
+@author: %(Mikel Val Calvo)s
+@email: %(mikel1982mail@gmail.com)
+@institution: %(Dpto. de Inteligencia Artificial, Universidad Nacional de Educación a Distancia (UNED))
+@DOI: 10.5281/zenodo.3759306 
 """
+#%%
 import numpy as np
 #from pybasicbayes.distributions import Regression, DiagonalRegression
 #from pylds.models import LDS

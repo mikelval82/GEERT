@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'bci_biosignals_03.ui'
-#
-# Created by: PyQt5 UI code generator 5.6
-#
-# WARNING! All changes made in this file will be lost!
-
+"""
+@author: %(Mikel Val Calvo)s
+@email: %(mikel1982mail@gmail.com)
+@institution: %(Dpto. de Inteligencia Artificial, Universidad Nacional de Educación a Distancia (UNED))
+@DOI: 10.5281/zenodo.3759306 
+"""
+#%%
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):

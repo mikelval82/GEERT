@@ -1,9 +1,15 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+@author: %(Mikel Val Calvo)s
+@email: %(mikel1982mail@gmail.com)
+@institution: %(Dpto. de Inteligencia Artificial, Universidad Nacional de Educación a Distancia (UNED))
+@DOI: 10.5281/zenodo.3759306 
+"""
+
 """Copyleft 2010 Forrest Sheng Bao http://fsbao.net
 Project homepage: http://pyeeg.org
 """
-
+#%%
 from numpy import zeros, floor, log10, log, mean, array, sqrt, vstack, cumsum, ones, log2, std
 from numpy.linalg import svd, lstsq
 from neurodsp.timefrequency import amp_by_time, freq_by_time

@@ -1,10 +1,11 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 @author: %(Mikel Val Calvo)s
 @email: %(mikel1982mail@gmail.com)
 @institution: %(Dpto. de Inteligencia Artificial, Universidad Nacional de Educación a Distancia (UNED))
+@DOI: 10.5281/zenodo.3759306 
 """
+#%%
 from FEATURES.online_features_02 import compute_online_features
 from FEATURES.feature_selection import rfe_selection
 from FILTERS.EAWICA_new import eawica

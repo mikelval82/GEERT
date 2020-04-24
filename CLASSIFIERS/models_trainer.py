@@ -1,10 +1,11 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 @author: %(Mikel Val Calvo)s
 @email: %(mikel1982mail@gmail.com)
 @institution: %(Dpto. de Inteligencia Artificial, Universidad Nacional de Educación a Distancia (UNED))
+@DOI: 10.5281/zenodo.3759306 
 """
+
 from sklearn.metrics import classification_report
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC

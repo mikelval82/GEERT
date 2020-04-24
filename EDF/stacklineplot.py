@@ -1,9 +1,9 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun 27 10:42:04 2019
-
-@author: anaiak
+@author: %(Mikel Val Calvo)s
+@email: %(mikel1982mail@gmail.com)
+@institution: %(Dpto. de Inteligencia Artificial, Universidad Nacional de Educación a Distancia (UNED))
+@DOI: 10.5281/zenodo.3759306 
 """
 
 import numpy as np

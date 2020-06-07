@@ -8,7 +8,7 @@
 #%%
 from FILTERS.filter_bank_manager import filter_bank_class
 from FILTERS.spectrum import spectrum 
-from FILTERS import AICAW, EAWICA
+from FILTERS import EAWICA
 
 from threading import Thread, Lock
 import time 
@@ -53,9 +53,10 @@ class data_manager_openBCI(Thread):
         filtered = self.filter_bank.pre_process( self.app.buffer.get() )
         filtered = filtered[:,int(self.app.constants.pos_ini):int(self.app.constants.pos_end)]  
         if method == 'EAWICA':
-            filtered = EAWICA.eawica(filtered, self.app.constants)
-        elif method == 'AICAW':
-            filtered = AICAW.aicaw(filtered, self.app.constants)
+            try:
+                filtered = EAWICA.eawica(filtered, self.app.constants)
+            except:
+                pass
         self.muttex.release()
         return filtered
 

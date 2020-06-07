@@ -78,7 +78,7 @@ class GUI():
             channel = self.app.constants.CHANNEL_IDS.index(self.bci_graph.Spectrogram_comboBox.currentText())
             spectrogram = self.app.eeg_dmg.get_powerSpectrogram(self.app.constants.METHOD, channel) 
             ini = int(self.app.constants.pos_ini/self.app.constants.SAMPLE_RATE)
-            end = int(self.app.constants.pos_end/self.app.constants.SAMPLE_RATE)
+            # end = int(self.app.constants.pos_end/self.app.constants.SAMPLE_RATE)
             self.spectrogram_Img.setImage(spectrogram[:,:].T, autoLevels=True)
             #self.spectrogram_Img.setImage(spectrogram[:,ini:end].T, autoLevels=True)
         else:

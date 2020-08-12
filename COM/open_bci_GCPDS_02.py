@@ -62,14 +62,14 @@ class OpenBCIBoard(Process):
         try:
             if not self.port:
                 self.port = self.find_port()
-            print("Connecting to V3 at port %s" %(self.port))
+            self.log.update_text("Connecting to V3 at port %s" %(self.port))
         except:
             if not self.port:
                 self.port = self.find_port()
-            print("Connecting to V3 at port %s" %(self.port))
+            self.log.update_text("Connecting to V3 at port %s" %(self.port))
             
         self.ser = serial.Serial(port= self.port, baudrate = self.baudrate, timeout=self.timeout)
-        print("Serial established...")  
+        self.log.update_text("Serial established -> " + str(self.ser.write(b'v')))    
        
     def run(self):       
         while True:  
@@ -94,14 +94,10 @@ class OpenBCIBoard(Process):
         self.check_connection()
         self.log.update_text('Streaming: ' + str(self.streaming.value))
              
-    def connect(self):
+    def connect(self):            
         self.log.update_text("Connecting to V3 at port %s" %(self.port))
         self.ser = serial.Serial(port= self.port, baudrate = self.baudrate, timeout=self.timeout)
-        self.log.update_text("Serial established...")  
-        time.sleep(2)      
-        self.log.update_text(str(self.ser.write(b'v')))
-        time.sleep(1)
-        self.print_incoming_text()
+        self.log.update_text("Serial established -> " + str(self.ser.write(b'v')))  
         self.isconnected.value = True
         
     def disconnect(self):

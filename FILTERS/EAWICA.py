@@ -26,13 +26,13 @@ def eawica(sample, constants, wavelet='db4', low_k=5, up_k=95, low_r=5, up_r=95,
     fb = filter_bank_class(constants)
     
     # COMPUTE WAVELET DECOMPOSED wcs_delta
-    wcs, wcs_beta, wcs_gamma = [],[],[]
+    wcs, wcs_gamma, wcs_beta, wcs_alpha = [],[],[],[]
     for i in range(n_channels):
         GAMMA, BETA, ALPHA, THETA, DELTA = fb.eawica_wavelet_band_pass(sample[i,:], wavelet)
-        pos = i*3
-        wcs.append([GAMMA,pos])
-        wcs.append([BETA,pos+1])
-        wcs.append([ALPHA,pos+2])
+        pos = i*2
+        wcs.append([THETA,pos])
+        wcs.append([DELTA,pos+1])
+        wcs_alpha.append(ALPHA)
         wcs_beta.append(BETA)
         wcs_gamma.append(GAMMA)
   
@@ -113,8 +113,8 @@ def eawica(sample, constants, wavelet='db4', low_k=5, up_k=95, low_r=5, up_r=95,
     
     data_cleaned = np.zeros(sample.shape)   
     for i in range(n_channels):
-        pos = i*3
-        data_cleaned[i,:] = wcs[pos][0]+wcs[pos+1][0]+wcs[pos+2][0]+wcs_beta[i]+wcs_gamma[i]  
+        pos = i*2
+        data_cleaned[i,:] = wcs[pos][0]+wcs[pos+1][0]+wcs_alpha[i]+wcs_beta[i]+wcs_gamma[i]
             
             
     return data_cleaned

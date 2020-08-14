@@ -4,7 +4,6 @@ pip install neurodsp
 pip install PyQt5
 pip install pyqtwebengine
 pip install scikit-learn
-pip install importlib
 pip install pandas
 pip install ica
 pip install scipy

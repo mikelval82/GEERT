@@ -19,7 +19,7 @@ from scipy.stats import zscore
 import numpy as np
 
 #%% ENHANCED WAVELET-ICA 
-def eawica(sample, constants, wavelet='db4', low_k=5, up_k=95, low_r=5, up_r=95, alpha=6):
+def eawica(sample, constants, wavelet='db4', low_k=45, up_k=95, low_r=45, up_r=95, alpha=6):
     n_channels = sample.shape[0]
     n_epochs = constants.SECONDS
     n_samples = constants.WINDOW

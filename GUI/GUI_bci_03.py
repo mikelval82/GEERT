@@ -181,7 +181,7 @@ class GUI():
         self.bci_graph.Spectrogram_comboBox.addItems(self.app.constants.CHANNEL_IDS)
        
     def initFilteringComboBox(self):
-        self.bci_graph.filtering_comboBox.addItems(['Butterworth','EAWICA','AICAW'])
+        self.bci_graph.filtering_comboBox.addItems(['Butterworth','EAWICA'])
        
     def initLongTermViewCurves(self):
         ########################### EEG #####################################

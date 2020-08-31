@@ -12,7 +12,7 @@ import os
 class constants():
     def __init__(self, seconds=6, sample_rate=250, baud=115200, channels=8, ndims=8, signal='eeg', lowcut=1, highcut=45, order=5):
         ############### CONSTANTS ######################
-        self.ADDRESS = '10.1.28.117'
+        self.ADDRESS = 'localhost'
         self.PORT = 10000
         self.SECONDS = seconds
         self.SAMPLE_RATE = sample_rate

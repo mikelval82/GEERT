@@ -44,6 +44,8 @@ class GUI():
         self.bci_graph.btn_connect.clicked.connect(callbacks[0])
         self.bci_graph.btn_start.clicked.connect(callbacks[1])
         self.bci_graph.btn_trigger.clicked.connect(lambda: self.launch_trigger_server(callbacks[2]))
+        self.bci_graph.port_spinBox.valueChanged.connect(lambda: self.set_PORT())
+        self.bci_graph.IP_textEdit.textChanged.connect(lambda: self.set_IP())
         self.bci_graph.btn_user.clicked.connect(callbacks[3])
         self.bci_graph.btn_loadScript.clicked.connect(callbacks[4])
         self.bci_graph.frequency_comboBox.currentIndexChanged.connect(lambda: self.set_frequency())
@@ -128,6 +130,11 @@ class GUI():
     def set_order(self):
         self.app.constants.update('order', int(self.bci_graph.butterOrder_spinBox.value()))
         
+    def set_PORT(self):
+        print(self.bci_graph.port_spinBox.value())
+        
+    def set_IP(self):
+        print(self.bci_graph.IP_textEdit.text())
  ###################### GUI SETTINGS ##################################################   
     def eeg_short_view(self):
         self.app.constants.pos_ini, self.app.constants.pos_end = self.lr.getRegion() 

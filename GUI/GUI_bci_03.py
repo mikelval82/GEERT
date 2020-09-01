@@ -43,7 +43,7 @@ class GUI():
         ########### set callbacks ###########
         self.bci_graph.btn_connect.clicked.connect(callbacks[0])
         self.bci_graph.btn_start.clicked.connect(callbacks[1])
-        self.bci_graph.btn_trigger.clicked.connect(lambda: self.launch_trigger_server(callbacks[2]))
+        self.bci_graph.btn_trigger.clicked.connect(lambda: callbacks[2])
         self.bci_graph.port_spinBox.valueChanged.connect(lambda: self.set_PORT())
         self.bci_graph.IP_textEdit.textChanged.connect(lambda: self.set_IP())
         self.bci_graph.btn_user.clicked.connect(callbacks[3])
@@ -79,7 +79,7 @@ class GUI():
         if self.bci_graph.Spectrogram_radioButton.isChecked():
             channel = self.app.constants.CHANNEL_IDS.index(self.bci_graph.Spectrogram_comboBox.currentText())
             spectrogram = self.app.eeg_dmg.get_powerSpectrogram(self.app.constants.METHOD, channel) 
-            ini = int(self.app.constants.pos_ini/self.app.constants.SAMPLE_RATE)
+#            ini = int(self.app.constants.pos_ini/self.app.constants.SAMPLE_RATE)
             # end = int(self.app.constants.pos_end/self.app.constants.SAMPLE_RATE)
             self.spectrogram_Img.setImage(spectrogram[:,:].T, autoLevels=True)
             #self.spectrogram_Img.setImage(spectrogram[:,ini:end].T, autoLevels=True)
@@ -92,16 +92,7 @@ class GUI():
         sample = self.app.eeg_dmg.get_short_sample(self.app.constants.METHOD)
         for i in range(self.app.constants.CHANNELS):
             self.curves_EEG_short[i].setData(sample[i,:])#
-            
-################## TRIGGER MANAGER ###########################################################
-    def launch_trigger_server(self, callback):
-        if self.app.trigger_server.activated:
-            self.app.trigger_server.close_socket()
-        else:
-            self.app.trigger_server.create_socket()   
-            self.app.trigger_server.start()
-            self.app.trigger_server.new_COM1.connect(callback) 
-            
+                     
 ############### BUTTON LISTENERS ###########################################################          
     def set_channel_spectrogram(self):
         self.initFrequencyView()
@@ -131,24 +122,19 @@ class GUI():
         self.app.constants.update('order', int(self.bci_graph.butterOrder_spinBox.value()))
         
     def set_PORT(self):
-        print(self.bci_graph.port_spinBox.value())
+        self.app.constants.update('port', self.bci_graph.port_spinBox.value())
         
     def set_IP(self):
-        print(self.bci_graph.IP_textEdit.text())
+        self.app.constants.update('IP', self.bci_graph.IP_textEdit.text())
  ###################### GUI SETTINGS ##################################################   
-    def eeg_short_view(self):
-        self.app.constants.pos_ini, self.app.constants.pos_end = self.lr.getRegion() 
-        self.bci_graph.Emotions_plot.setXRange(0, int(self.app.constants.pos_end - self.app.constants.pos_ini))
-        self.bci_graph.Emotions_plot.setLimits(xMin=0, xMax=int(self.app.constants.pos_end - self.app.constants.pos_ini))
-
     def set_plots(self, reset = False):
         channels = self.app.constants.CHANNEL_IDS
         ### EEG plot settings ###
         self.bci_graph.EEG_plot.setLabel('bottom', 'Samples', units='n')
         self.bci_graph.EEG_plot.getAxis('left').setTicks([[(100, channels[0]), (200, channels[1]), (300, channels[2]), (400, channels[3]), (500, channels[4]), (600, channels[5]), (700, channels[6]), (800, channels[7])]])
+        self.bci_graph.EEG_plot.showGrid(True, True, alpha = 0.3)
         self.bci_graph.EEG_plot.setYRange(0, 900)
         self.bci_graph.EEG_plot.setXRange(0, self.app.constants.LARGE_WINDOW)
-        self.bci_graph.EEG_plot.showGrid(True, True, alpha = 0.3)
         self.bci_graph.EEG_plot.setLimits(xMin=0, xMax=self.app.constants.LARGE_WINDOW)
         # Linear region settings #
         if not reset:
@@ -166,6 +152,11 @@ class GUI():
         self.bci_graph.Emotions_plot.showGrid(True, True, alpha = 0.3)
         self.bci_graph.Emotions_plot.setLimits(xMin=0, xMax=int(self.app.constants.pos_end - self.app.constants.pos_ini))
 
+    def eeg_short_view(self):
+        self.app.constants.pos_ini, self.app.constants.pos_end = self.lr.getRegion() 
+        self.bci_graph.Emotions_plot.setXRange(0, int(self.app.constants.pos_end - self.app.constants.pos_ini))
+        self.bci_graph.Emotions_plot.setLimits(xMin=0, xMax=int(self.app.constants.pos_end - self.app.constants.pos_ini))
+        
     def load_style(self):        
         self.styleQwtPlot('EEG', self.bci_graph.EEG_plot)
         self.styleQwtPlot('Frequency', self.bci_graph.Frequency_plot)

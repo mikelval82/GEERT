@@ -36,8 +36,11 @@ class recording_manager:
             # update metadata
             self.app.constants.running_window = 0
             # new file for new trial
-            self.io.create_file()
-            self.io.online_annotation(action)
+            if self.app.constants.ispath:
+                self.io.create_file()
+                self.io.online_annotation(action)
+            else:
+                self.app.log.update_text('No user filename has been defined!!')
             # init driver and gui updating
             self.app.eeg_dmg.reset_data_store()
             self.app.driver.send_start()
@@ -46,7 +49,6 @@ class recording_manager:
             self.app.gui.freq_timer.start(self.app.constants.refresh_rate) 
         elif action == 'stop':
             self.app.log.update_text('Stop recording trial: ' + str(self.app.constants.running_trial))
-            self.io.online_annotation(action)
             # stop driver and gui updating
             self.app.driver.send_stop()
             self.app.gui.eeg_timer.stop()    
@@ -54,8 +56,12 @@ class recording_manager:
             self.app.gui.freq_timer.stop()  
             # update file
             self.app.eeg_dmg.append_to_store()
-            self.io.append_to_file( self.app.eeg_dmg.all_data_store )
-            self.io.close_file()
+            if self.app.constants.ispath:
+                self.io.online_annotation(action)
+                self.io.append_to_file( self.app.eeg_dmg.all_data_store )
+                self.io.close_file()
+            else:
+                self.app.log.update_text('No user filename was defined, so no data has been stored!!')
         else:
             self.app.eeg_dmg.online_annotation(action)
             self.app.constants.last_action = action

@@ -9,63 +9,71 @@
 from PyQt5 import QtCore #conda install pyqt
 
 import socket
-import sys
 
 class trigger_server(QtCore.QThread):
-    new_COM1 = QtCore.pyqtSignal(str)
+    socket_emitter = QtCore.pyqtSignal(str)
+    log_emitter = QtCore.pyqtSignal(str)
     
-    def __init__(self, address, port, parent=None):
+    def __init__(self, constants, parent=None):
         super(trigger_server, self).__init__(parent)
-        self.address = address
-        self.port = port
+        self.constants = constants
         self.activated = False
+        self.server_address = None
              
     def create_socket(self):
-        self.activated = True
         # Create a TCP/IP socket
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # Bind the socket to the port
-        server_address = (self.address, self.port)
-        print(sys.stderr, 'starting up on %s port %s' % server_address)
-        self.sock.bind(server_address)
+        if not self.activated:
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # Bind the socket to the port
+            server_address = (self.constants.ADDRESS, self.constants.PORT)
+            self.log_emitter.emit(' starting up on %s port %s' % server_address)
+            try:
+                self.sock.bind(server_address)
+                self.activated = True
+            except socket.gaierror:
+                self.log_emitter.emit('[Errno -2] Unknown name or service')
+        else:
+            self.log_emitter.emit('Socket is already created up on %s port %s' % self.server_address)
         
     
     def run(self):
         # Listen for incoming connections
-        print('socket is listening!')
+        self.log_emitter.emit('Socket is listening!')
         self.sock.listen(1)
         while self.activated:
-            print(sys.stderr, 'waiting for a connection')
+            self.log_emitter.emit('Waiting for a connection')
             try:
+                self.log_emitter.emit('paso1')
                 self.connection, client_address = self.sock.accept()
+                self.log_emitter.emit('paso2')
+                self.log_emitter.emit('connection accepted from %s port %s ' % client_address)
             except:
-                print(sys.stderr, 'Cannot accept connection due to a closed socket state.')
+                self.log_emitter.emit('Cannot accept connection due to a closed socket state.')
                 break
             try:
-                print(sys.stderr, 'connection from', client_address)
-        
                 # Receive the data in small chunks and retransmit it
                 while True:
-                    print('entro')
                     data = self.connection.recv(128)
-                    print(data.decode())
+
                     if data != b'':
-                        self.new_COM1.emit(data.decode())
+                        self.socket_emitter.emit(data.decode())
                     # INCOMMING DATA
                     if data:
-                        print(sys.stderr, 'received "%s"' % data)
+                        print('data')
+                        self.log_emitter.emit('received "%s"' % data)
                        
                     else:
-                        print(sys.stderr, 'no more data from', client_address)
+                        self.log_emitter.emit('no more data from ' + client_address)
                         break
             except:
-                print('Error while listening')
+                self.log_emitter.emit('Error while listening')
             finally:
                 self.close_socket()
         
     def close_socket(self):  
-        self.activated = False  
+        self.activated = False
         self.sock.shutdown(socket.SHUT_RDWR)
         self.sock.close()
-        print('socket is closed!')
+        self.log_emitter.emit('Socket is closed!')
+        
         

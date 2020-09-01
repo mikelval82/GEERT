@@ -33,8 +33,6 @@ class MyApp(QtWidgets.QApplication):
         self.slots = SlotsManager()
         ########### queue ###########
         self.queue = Queue()
-        ##### TRIGGER SERVER ############
-        self.trigger_server = trigger_server(self.constants.ADDRESS, self.constants.PORT)
         ################ BUFFER  ####################     
         self.buffer = buffer(self.constants)
         self.buffer.emitter.connect(self.slots.trigger)
@@ -44,12 +42,16 @@ class MyApp(QtWidgets.QApplication):
         ###### INIT tcp/ip INTERFACE FOR DATA ACQUISITION
         self.recording_manager = recording_manager(self)
         ################# INIT GUI ################################
-        self.gui = GUI(self, callbacks = [self.connection_manager, self.recording_manager.test_acquisition, self.recording_manager.update_state, self.saveFileDialog, self.openFileNameDialog])
+        self.gui = GUI(self, callbacks = [self.connection_manager, self.recording_manager.test_acquisition, self.launch_trigger_server, self.saveFileDialog, self.openFileNameDialog])
         ########## LOGGER ####################
-        self.log = log.logger(self.gui)
+        self.log = log.logger(self.gui.bci_graph.logger)
         ####### INIT DRIVER ###########
         self.driver = openBCI(self.queue, self.recording_manager.streaming, self.isconnected, self.log)
         self.driver.start()
+        ##### TRIGGER SERVER ############
+        self.trigger_server = trigger_server(self.constants)
+        self.trigger_server.socket_emitter.connect(self.recording_manager.update_state)
+        self.trigger_server.log_emitter.connect(self.log.update_text)
 
     def connection_manager(self):        
         if not self.isconnected.value:
@@ -57,6 +59,13 @@ class MyApp(QtWidgets.QApplication):
             self.driver.enable_filters()
         else:
             self.driver.disconnect()
+            
+    def launch_trigger_server(self):
+        if self.trigger_server.activated:
+            self.trigger_server.close_socket()
+        else:
+            self.trigger_server.create_socket()   
+            self.trigger_server.start()  
              
     def saveFileDialog(self):    
         options = QtWidgets.QFileDialog.Options()

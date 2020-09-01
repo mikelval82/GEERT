@@ -52,9 +52,14 @@ class constants():
         elif name == 'method':
             self.METHOD = value
             if value != 'Butterworth':
-                self.short_refresh_rate = 0.05#50 ms for refresh plots
+                self.short_refresh_rate = 1#seconds for refresh plots
             else:
                 self.short_refresh_rate = self.refresh_rate
+        elif name=='port':
+            self.PORT = value
+        elif name=='IP':
+            self.ADDRESS = value
+            
         
     def set_filter_range(self, activated):
         if activated == 'Full':

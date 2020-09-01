@@ -11,21 +11,23 @@ from multiprocessing import Process
 
 class io_manager():
     
-    def __init__(self, app):
-        self.app = app
-        self.edf = edf_writter(self.app.constants)
+    def __init__(self, constants, buffer, log):
+        self.constants = constants
+        self.buffer = buffer
+        self.log = log
+        self.edf = edf_writter(self.constants)
         
     # -- EDF files -- #
     def create_file(self):
-        self.edf.new_file(self.app.constants.PATH + '_trial_' + str(self.app.constants.running_trial) + '.edf')
-        self.app.log.update_text('* -- USER ' + self.app.constants.PATH + ' CREATED -- *')
+        self.edf.new_file(self.constants.PATH + '_trial_' + str(self.constants.running_trial) + '.edf')
+        self.log.update_text('* -- USER ' + self.constants.PATH + ' CREATED -- *')
         
     def close_file(self):
         self.edf.close_file()
-        self.app.log.update_text('* -- USER ' + self.app.constants.PATH + ' CLOSED -- *')
+        self.log.update_text('* -- USER ' + self.constants.PATH + ' CLOSED -- *')
         
     def append_to_file(self, all_data_store):# tarda mucho en guardar, probar hilos o guardar en variable allData hasta terminar registro y luego guardar en archivo
-        if self.app.constants.ispath:
+        if self.constants.ispath:
             # save EDF trial file
             self.edf.append(all_data_store)
             
@@ -37,7 +39,7 @@ class io_manager():
 
     
     def online_annotation(self, notation):
-        instant = self.app.constants.running_window*self.app.constants.SECONDS + (self.app.buffer.cur % self.app.buffer.size_short)/self.app.constants.SAMPLE_RATE
+        instant = self.constants.running_window*self.constants.SECONDS + (self.buffer.cur % self.buffer.size_short)/self.constants.SAMPLE_RATE
         duration = -1
         event = notation
         self.edf.annotation(instant, duration, event)

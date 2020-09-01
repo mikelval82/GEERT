@@ -16,27 +16,29 @@ import numpy as np
 
 class data_manager_openBCI(Thread):
     
-    def __init__(self, app):
+    def __init__(self, constants, queue, buffer, slots):
         Thread.__init__(self) 
-        ### APP REFERENCE ################
-        self.app = app
         ### data ###########
-        self.all_data_store = np.empty(shape=(self.app.constants.CHANNELS, 0))
+        self.constants = constants
+        self.queue = queue
+        self.slots = slots
+        self.buffer = buffer
+        self.all_data_store = np.empty(shape=(self.constants.CHANNELS, 0))
         ########### SHARED QUEUE ###########
-        self.app.slots.append(self.append_to_store)
-        self.filter_bank = filter_bank_class(self.app.constants)
+        self.slots.append(self.append_to_store)
+        self.filter_bank = filter_bank_class(self.constants)
         self.filter_bank.update_filters()
-        self.spectrum = spectrum(self.app.constants)
+        self.spectrum = spectrum(self.constants)
         ##### Mutex #####
         self.muttex = Lock()
      
     def run(self):     
         while True:  
             time.sleep(0.0001)
-            while not self.app.queue.empty(): 
+            while not self.queue.empty(): 
                 self.muttex.acquire()
-                sample = self.app.queue.get()
-                self.app.buffer.append(sample)
+                sample = self.queue.get()
+                self.buffer.append(sample)
                 self.muttex.release()
                 
     def init_filters(self):
@@ -44,17 +46,17 @@ class data_manager_openBCI(Thread):
         
     def get_sample(self): 
         self.muttex.acquire()
-        filtered = self.filter_bank.pre_process( self.app.buffer.get() )
+        filtered = self.filter_bank.pre_process( self.buffer.get() )
         self.muttex.release()
         return filtered
     
     def get_short_sample(self, method): 
         self.muttex.acquire()
-        filtered = self.filter_bank.pre_process( self.app.buffer.get() )
-        filtered = filtered[:,int(self.app.constants.pos_ini):int(self.app.constants.pos_end)]  
+        filtered = self.filter_bank.pre_process( self.buffer.get() )
+        filtered = filtered[:,int(self.constants.pos_ini):int(self.constants.pos_end)]  
         if method == 'EAWICA':
             try:
-                filtered = EAWICA.eawica(filtered, self.app.constants)
+                filtered = EAWICA.eawica(filtered, self.constants)
             except:
                 pass
         self.muttex.release()
@@ -62,26 +64,26 @@ class data_manager_openBCI(Thread):
 
     def get_powerSpectrum(self, method):
         self.muttex.acquire()
-        filtered = self.filter_bank.pre_process( self.app.buffer.get() )
+        filtered = self.filter_bank.pre_process( self.buffer.get() )
         freqs, spectra = self.spectrum.get_spectrum( filtered )
         self.muttex.release()
         return freqs, spectra
     
     def get_powerSpectrogram(self, method, channel):
         self.muttex.acquire()
-        filtered = self.filter_bank.pre_process( self.app.buffer.get() )
+        filtered = self.filter_bank.pre_process( self.buffer.get() )
         spectrogram = self.spectrum.get_spectrogram( filtered[channel,:])
         self.muttex.release()
         return spectrogram
     
     def append_to_store(self):
-        sample_data = self.get_short_sample(self.app.constants.METHOD)
+        sample_data = self.get_short_sample(self.constants.METHOD)
         self.all_data_store = np.hstack((self.all_data_store, sample_data))  
-        self.app.constants.running_window += 1
+        self.constants.running_window += 1
     
     def reset_data_store(self):       
-        self.all_data_store = np.empty(shape=(self.app.constants.CHANNELS, 0))
-        self.app.constants.running_trial += 1
+        self.all_data_store = np.empty(shape=(self.constants.CHANNELS, 0))
+        self.constants.running_trial += 1
  
 
         

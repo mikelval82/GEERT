@@ -43,7 +43,7 @@ class GUI():
         ########### set callbacks ###########
         self.bci_graph.btn_connect.clicked.connect(callbacks[0])
         self.bci_graph.btn_start.clicked.connect(callbacks[1])
-        self.bci_graph.btn_trigger.clicked.connect(lambda: callbacks[2])
+        self.bci_graph.btn_trigger.clicked.connect(callbacks[2])
         self.bci_graph.port_spinBox.valueChanged.connect(lambda: self.set_PORT())
         self.bci_graph.IP_textEdit.textChanged.connect(lambda: self.set_IP())
         self.bci_graph.btn_user.clicked.connect(callbacks[3])
@@ -103,12 +103,12 @@ class GUI():
             self.app.eeg_dmg.init_filters()
             
     def set_filtering(self):
-        if self.app.streaming.value:
+        if self.app.recording_manager.streaming.value:
             self.eeg_timer.stop()      
             self.freq_timer.stop()
             self.eeg_short_timer.stop()
         self.app.constants.update('method', self.bci_graph.filtering_comboBox.currentText())  
-        if self.app.streaming.value:
+        if self.app.recording_manager.streaming.value:
             self.eeg_timer.start(self.app.constants.refresh_rate) 
             self.freq_timer.start(self.app.constants.refresh_rate) 
             self.eeg_short_timer.start(self.app.constants.short_refresh_rate) 

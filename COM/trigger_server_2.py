@@ -22,18 +22,16 @@ class trigger_server(QtCore.QThread):
              
     def create_socket(self):
         # Create a TCP/IP socket
-        if not self.activated:
-            self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            # Bind the socket to the port
-            server_address = (self.constants.ADDRESS, self.constants.PORT)
-            self.log_emitter.emit(' starting up on %s port %s' % server_address)
-            try:
-                self.sock.bind(server_address)
-                self.activated = True
-            except socket.gaierror:
-                self.log_emitter.emit('[Errno -2] Unknown name or service')
-        else:
-            self.log_emitter.emit('Socket is already created up on %s port %s' % self.server_address)
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # Bind the socket to the port
+        server_address = (self.constants.ADDRESS, self.constants.PORT)
+        self.log_emitter.emit(' starting up on %s port %s' % server_address)
+        try:
+            self.sock.bind(server_address)
+            self.activated = True
+        except socket.gaierror:
+            self.log_emitter.emit('[Errno -2] Unknown name or service')
+
         
     
     def run(self):
@@ -43,9 +41,7 @@ class trigger_server(QtCore.QThread):
         while self.activated:
             self.log_emitter.emit('Waiting for a connection')
             try:
-                self.log_emitter.emit('paso1')
                 self.connection, client_address = self.sock.accept()
-                self.log_emitter.emit('paso2')
                 self.log_emitter.emit('connection accepted from %s port %s ' % client_address)
             except:
                 self.log_emitter.emit('Cannot accept connection due to a closed socket state.')

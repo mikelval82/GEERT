@@ -83,6 +83,7 @@ class filter_bank_class():
         for i in range(levels+1):
             if i != 7 and i != 8:
                 gamma_coeffs[i] = np.zeros(gamma_coeffs[i].shape)
+
         # beta
         for i in range(levels+1):
             if i != 6:

@@ -55,7 +55,6 @@ class trigger_server(QtCore.QThread):
                         self.socket_emitter.emit(data.decode())
                     # INCOMMING DATA
                     if data:
-                        print('data')
                         self.log_emitter.emit('received "%s"' % data)
                        
                     else:

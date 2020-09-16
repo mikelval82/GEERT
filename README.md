@@ -24,6 +24,9 @@ remotely.
 4. Online behaviour labelling interface which labels are synchronised and stored on
 EDF files.
 
+# APP:
+![Image description](https://github.com/mikelval82/GePHYCAM/blob/master/images/GEERT.png)
+
 # DEPENDENCIES:
 ```
 PythonQwt

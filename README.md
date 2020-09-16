@@ -27,6 +27,9 @@ EDF files.
 # APP:
 ![Image description](https://github.com/mikelval82/GEERT/blob/master/images/GEERT.png)
 
+# COMPATIBLE:
+Only for Linux
+
 # DEPENDENCIES:
 ```
 PythonQwt

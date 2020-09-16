@@ -25,7 +25,7 @@ remotely.
 EDF files.
 
 # APP:
-![Image description](https://github.com/mikelval82/GePHYCAM/blob/master/images/GEERT.png)
+![Image description](https://github.com/mikelval82/GEERT/blob/master/images/GEERT.png)
 
 # DEPENDENCIES:
 ```

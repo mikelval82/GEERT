@@ -19,18 +19,20 @@ class trigger_server(QtCore.QThread):
         self.constants = constants
         self.activated = False
         self.server_address = None
-             
+            
     def create_socket(self):
         # Create a TCP/IP socket
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # Bind the socket to the port
-        server_address = (self.constants.ADDRESS, self.constants.PORT)
-        self.log_emitter.emit(' starting up on %s port %s' % server_address)
+        self.server_address = (self.constants.ADDRESS, self.constants.PORT)
+        self.log_emitter.emit(' starting up on %s port %s' % self.server_address)
         try:
-            self.sock.bind(server_address)
+            self.sock.bind(self.server_address)
             self.activated = True
         except socket.gaierror:
             self.log_emitter.emit('[Errno -2] Unknown name or service')
+        finally:
+            return self.activated
 
         
     

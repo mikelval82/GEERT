@@ -57,19 +57,21 @@ class MyApp(QtWidgets.QApplication):
             self.driver.enable_filters()
         else:
             self.driver.disconnect()
-            
+        
     def launch_trigger_server(self):
         if self.trigger_server_activated:
             self.trigger_server.close_socket()
             del self.trigger_server
+            self.trigger_server_activated = False
         else:
             self.trigger_server = trigger_server(self.constants)
             self.trigger_server.socket_emitter.connect(self.update_state)
-            self.trigger_server.log_emitter.connect(self.log.update_text)
-            self.trigger_server.create_socket()   
-            self.trigger_server.start()  
-            
-        self.trigger_server_activated = not self.trigger_server_activated
+            self.trigger_server.log_emitter.connect(self.gui.log.update_text)
+            self.trigger_server_activated = self.trigger_server.create_socket()
+            if self.trigger_server_activated:
+                self.trigger_server.start()  
+            else:
+                del self.trigger_server
     
     def test_acquisition(self):
         if not self.streaming.value:

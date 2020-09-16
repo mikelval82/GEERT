@@ -148,21 +148,21 @@ Wearable devices are tools of particular interest because of the possibilities
  could benefit from open source applications.
  Pragmatically, a project of this type requires technical solutions to be
  provided.
- Therefore, a set of applications has been gradually developed to meet the
- requirements of experimental designs.
+ Therefore, GEERT application has been developed to meet the requirements
+ of experimental designs.
  All the code has been developed with pure python libraries in an object-oriente
 d paradigm.
  The software engineering process was carried out taking into account cohesion
  and coupling for proper modularization.
- This allows the applications to be modular, scalable, and easy to maintain;
- in fact, this is a key aspect of any scientific tool to allow researchers
- to make modifications and to fulfill the specific requirements of each
- experimental scenario.
+ This allows GEERT to be modular, scalable, and easy to maintain; in fact,
+ this is a key aspect of any scientific tool to allow researchers to make
+ modifications and to fulfill the specific requirements of each experimental
+ scenario.
 \end_layout
 
 \begin_layout Standard
-The philosophy of these applications is based on a supervised machine learning
- approach and therefore they offer two modes of interaction: 
+The philosophy of GEERT application is based on a supervised machine learning
+ approach and therefore it offers two modes of interaction: 
 \end_layout
 
 \begin_layout Itemize
@@ -177,18 +177,17 @@ The second provides online signal processing using pre-trained models to
 \end_layout
 
 \begin_layout Standard
-The proposed applications are versatile and easily adaptable to different
- experimental designs while maintaining high-performance real-time signal
- processing.
- Aware that pattern recognition is in constant development, these applications
- offer the option of importing python external scripts, which must have
+The GEERT application is versatile and easily adaptable to different experimenta
+l designs while maintaining high-performance real-time signal processing.
+ Aware that pattern recognition is in constant development, this application
+ offers the option of importing python external scripts, which must have
  a predefined structure, to include self-developed machine learning methodologie
 s.
  Besides, as experimental designs require event synchronization, a TCP/IP
  interface has been provided.
- These applications are expected to be accessible to the entire scientific
- community, providing a resourceful tool for experimental paradigms of human
- behavior, which encompasses the following functionalities:
+ GEERT is expected to be accessible to the entire scientific community,
+ providing a resourceful tool for experimental paradigms of human behavior,
+ which encompasses the following functionalities:
 \end_layout
 
 \begin_layout Itemize
@@ -201,7 +200,8 @@ Trigger synchronization by a TCP/IP interface that allows start/stop the
 \end_layout
 
 \begin_layout Itemize
-Recording of data on European Data Format (EDF) for physiological signals.
+Recording of data on European Data Format (EDF) for electrophysiological
+ signals.
 \end_layout
 
 \begin_layout Itemize
@@ -212,203 +212,6 @@ Online behavior labeling interface whose labels are synchronized and stored
 \begin_layout Itemize
 Online signal processing with self-developed methodologies through the possibili
 ty of importing external python scripts.
-\end_layout
-
-\begin_layout Subsection
-Biosignals application
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Biosignals-application"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Description
-Title: General BVP, GSR, temperature (TMP) and accelerometers (ACC) experimentat
-ion in real-time, an open source software for physiological real-time experiment
-al designs
-\end_layout
-
-\begin_layout Description
-Authors: Mikel Val Calvo
-\end_layout
-
-\begin_layout Description
-URL: 
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-https://github.com/mikelval82/Biosignals
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Description
-License: GNU General Public License v3.0
-\end_layout
-
-\begin_layout Description
-DOI: 
-\begin_inset CommandInset href
-LatexCommand href
-name "10.5281/zenodo.3759262"
-target "https://doi.org/10.5281/zenodo.3759262"
-literal "false"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace bigskip
-\end_inset
-
-This application has been built to further the research on the study of
- physiological signals, such as BVP, GSR, temperature (TMP) and accelerometers
- (ACC), related to human behavior, with the use of the Empatica E4 wristband.
- Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:BIOSIGNALS:-General-physiologica"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- shows the layout of the BIOSIGNALS interface.
- Each section has been numbered to properly explain the role of each of
- the components: 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement !b
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /home/mikel/Escritorio/tesis-lyx-bib/figs/biosignals_noted.png
-	lyxscale 15
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-BIOSIGNALS: General physiological experimentation in real-time, an open
- source software for real-time physiological signals acquisition and processing
- with the Empatica E4 wristband.
- 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:BIOSIGNALS:-General-physiologica"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Set Users: Allows for setting the name of the user file where acquired data
- will be stored.
-\end_layout
-
-\begin_layout Enumerate
-Load Script: For loading external python scripts developed by users for
- specific experiments.
-\end_layout
-
-\begin_layout Enumerate
-Empatica Server Connect/Disconnect: Enables the connection and disconnection
- between the Empatica Server and the Biosignals.
-\end_layout
-
-\begin_layout Enumerate
-Empatica ID: A spin box to specify to which Empatica E4 device to connect.
-\end_layout
-
-\begin_layout Enumerate
-Refresh: Requests to the Empatica Server the ID of Empatica E4 devices available.
-\end_layout
-
-\begin_layout Enumerate
-Connect: Enables the connection and disconnection between the specified
- device through the Empatica Server and the Biosignals driver.
-\end_layout
-
-\begin_layout Enumerate
-BVP Window size (seconds): A Spin Box to set the window size of the BVP
- signal.
-\end_layout
-
-\begin_layout Enumerate
-GSR Window size (seconds): A Spin Box to set the window size of the GSR
- signal.
-\end_layout
-
-\begin_layout Enumerate
-TMP Window size (seconds): A Spin Box to set the window size of the TMP
- signal.
-\end_layout
-
-\begin_layout Enumerate
-ACC Window size (seconds): A Spin Box to set the window size of the ACC
- signals.
-\end_layout
-
-\begin_layout Enumerate
-Start/Stop: A button to start/stop real-time visualization.
-\end_layout
-
-\begin_layout Enumerate
-Log viewer: Shows information regarding the internal state of the application.
-\end_layout
-
-\begin_layout Enumerate
-BVP Long Term View: Allows the visualization in real-time of acquired BVP
- signals.
-\end_layout
-
-\begin_layout Enumerate
-GSR Long Term View: Allows the visualization in real-time of acquired GSR
- signals.
-\end_layout
-
-\begin_layout Enumerate
-TMP Long Term View: Allows the visualization in real-time of acquired TMP
- signals.
-\end_layout
-
-\begin_layout Enumerate
-ACC Long Term View: Allows the visualization in real-time of acquired ACC
- signals.
 \end_layout
 
 \begin_layout Subsection
@@ -601,270 +404,14 @@ Spectrogram Term View: Allows the visualization of each EEG signals spectrogram
 \end_layout
 
 \begin_layout Subsection
-GePHYCAM application
-\end_layout
-
-\begin_layout Description
-Title: GePHYCAM: General electrophysiological and camera acquisition system
- for human behaviour recordings in real-time
-\end_layout
-
-\begin_layout Description
-Authors: Mikel Val Calvo
-\end_layout
-
-\begin_layout Description
-URL: 
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-https://github.com/mikelval82/GePHYCAM
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Description
-License: GNU General Public License v3.0
-\end_layout
-
-\begin_layout Description
-DOI: 
-\begin_inset CommandInset href
-LatexCommand href
-name "10.5281/zenodo.3727503"
-target "https://doi.org/10.5281/zenodo.3727503"
-literal "false"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This application looks forward to providing a resourceful tool for human-behavio
-r experimental paradigms using several information sources such as EEG,
- GSR, BVP, TMP, ACC, and VIDEO.
- Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:GePHYCAM:-General-electrophysiol"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- shows the layout of the GePHYCAM interface.
- Each section has been numbered to properly explain the role of each of
- the components:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement !t
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /home/mikel/Escritorio/tesis-lyx-bib/figs/GePHYCAM_noted.png
-	lyxscale 70
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-GePHYCAM: General electrophysiological and camera acquisition system for
- human behaviour recordings in real-time.
- 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:GePHYCAM:-General-electrophysiol"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Save: Allows for setting the name of the user files where acquired data
- will be stored.
-\end_layout
-
-\begin_layout Enumerate
-Script: For loading external python scripts developed by users for specific
- experiments.
-\end_layout
-
-\begin_layout Enumerate
-Trigger: Starts the trigger server for event synchronization.
-\end_layout
-
-\begin_layout Enumerate
-Trigger PORT: A Spin Box to specify the PORT to be used.
-\end_layout
-
-\begin_layout Enumerate
-Trigger IP: A Spin Box to specify the IP direction to be used.
-\end_layout
-
-\begin_layout Enumerate
-Start: Starts and stops real-time visualization.
-\end_layout
-
-\begin_layout Enumerate
-Empatica Server Connect/Disconnect: Enables the connection and disconnection
- between the Empatica Server and the GePHYCAM.
-\end_layout
-
-\begin_layout Enumerate
-Refresh: Requests to the Empatica Server the ID of Empatica E4 devices available.
-\end_layout
-
-\begin_layout Enumerate
-Empatica ID: A spin box to specify to which Empatica E4 device to connect.
-\end_layout
-
-\begin_layout Enumerate
-E4: Enables the connection and disconnection between the specified device
- through the Empatica Server and the GePHYCAM E4 driver.
-\end_layout
-
-\begin_layout Enumerate
-OpenBCI: Enables the connection and disconnection between the OpenBCI and
- the GePHYCAM BCI driver through the corresponding serial device.
-\end_layout
-
-\begin_layout Enumerate
-CAM: Enables the connection and disconnection between the webcam and the
- GePHYCAM CAM driver.
-\end_layout
-
-\begin_layout Enumerate
-Long Term View: Allows the visualization in real-time of acquired EEG signals.
-\end_layout
-
-\begin_layout Enumerate
-BVP Long Term View: Allows the visualization in real-time of acquired BVP
- signals.
-\end_layout
-
-\begin_layout Enumerate
-GSR Long Term View: Allows the visualization in real-time of acquired GSR
- signals.
-\end_layout
-
-\begin_layout Enumerate
-TMP Long Term View: Allows the visualization in real-time of acquired TMP
- signals.
-\end_layout
-
-\begin_layout Enumerate
-Spectrogram: Activates/deactivates the visualization of the spectrogram
- in the spectrogram term view.
- When it is activated the spectrogram is shown, otherwise, power spectral
- density function is shown for each EEG channel.
-\end_layout
-
-\begin_layout Enumerate
-Channel_ID: A spin box that selects the EEG channel to be shown for the
- spectrogram.
-\end_layout
-
-\begin_layout Enumerate
-Butter filter order: A Spin Box to set the order of the Butterworth filter.
-\end_layout
-
-\begin_layout Enumerate
-Frequency range: Sets the frequency range of the Butterworth filter applied
- to signals.
-\end_layout
-
-\begin_layout Enumerate
-Filtering method: Determines the EEG online artifact removal (OAR) method
- to be applied.
-\end_layout
-
-\begin_layout Enumerate
-CAM Window size (seconds): A Spin Box to set the window size of the webcam
- video signal.
-\end_layout
-
-\begin_layout Enumerate
-EEG Window size (seconds): A Spin Box to set the window size of the EEG
- signals.
-\end_layout
-
-\begin_layout Enumerate
-BVP Window size (seconds): A Spin Box to set the window size of the BVP
- signal.
-\end_layout
-
-\begin_layout Enumerate
-GSR Window size (seconds): A Spin Box to set the window size of the GSR
- signal.
-\end_layout
-
-\begin_layout Enumerate
-TMP Window size (seconds): A Spin Box to set the window size of the TMP
- signal.
-\end_layout
-
-\begin_layout Enumerate
-Log viewer: Shows information regarding the internal state of the application.
-\end_layout
-
-\begin_layout Enumerate
-Webcam viewer: Allows the visualization in real-time of acquired webcam
- signal.
-\end_layout
-
-\begin_layout Enumerate
-Spectrogram Term View: Allows the visualization of each EEG channel spectrogram
- in real-time.
-\end_layout
-
-\begin_layout Enumerate
-Short Term View: Allows the visualization in real-time of acquired EEG signals
- falling inside the length and temporal location of the adjustable sliding
- window.
-\end_layout
-
-\begin_layout Subsection
 Software design principles
 \end_layout
 
 \begin_layout Standard
 As mentioned before, the design principles have been followed taking into
  account cohesion and coupling for proper modularization.
- All of the aforementioned applications follow the same structural design
- approach and share the core structure so it would be redundant a specific
- explanation for each of them.
- Therefore, a high-level description is provided that allows us to understand
- the design principles of each application.
+ A high-level description is provided that allows us to understand the design
+ principles.
  As can be noted in figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -879,11 +426,6 @@ noprefix "false"
  of the design is focused on drivers and the data managers.
  Hence, each device has its driver specification which in turn is assigned
  a specific data manager.
- That means, BIOSIGNALS and GEERT have only one driver each but for GePHYCAM
- three drivers are needed running in parallel with their corresponding data
- managers.
- As a result, each application requires a specific graphical interface definitio
-n but overall the logic is versatile, easy to maintain, and scalable.
 \end_layout
 
 \begin_layout Standard
@@ -1133,7 +675,7 @@ Main workflow scheme:
 \end_layout
 
 \begin_layout Standard
-Once an app is launched it can work as follows; Data Manager is threaded
+Once GEERT is launched it can work as follows; Data Manager is threaded
  and starts iteratively trying to extract values from the queue.
  The thread runs a loop that is controlled by a logical condition.
  The iteration process cannot acquire data if the queue is empty.
@@ -1205,7 +747,7 @@ Online scenario: The user, could perform online computation thanks to the
 \end_layout
 
 \begin_layout Standard
-The main highlights of the applications consist of its versatility: First,
+The main highlights of this application consist of its versatility: First,
  modularizing the interaction between the GUI manager and the Driver, which
  allows the embedding of drivers for other acquisition systems.
  Second, the separation between the GUI and the logic, where the former

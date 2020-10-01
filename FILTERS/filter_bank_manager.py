@@ -35,7 +35,7 @@ class filter_bank_class():
     def notch_filter(self): # f0 50Hz, 60 Hz
         Q = 30.0  # Quality factor
         # Design notch filter
-        b0, a0 = iirnotch(self.constants.NOTCH , Q, self.constants.SAMPLE_RATE)
+        b0, a0 = iirnotch(self.constants.NOTCH , Q, self.constants.SAMPLE_RATE)#
         return b0,a0
     
     def butter_bandpass(self):

@@ -8,7 +8,7 @@
 #%%
 from QTDesigner.bci_biosignals_01 import Ui_MainWindow as ui
 from PyQt5 import QtWidgets, QtCore
-from qwt.qt.QtGui import QFont
+from PyQt5.QtGui import QFont
 from qwt import  QwtText
 import pyqtgraph as pg
 import numpy as np
